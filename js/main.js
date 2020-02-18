@@ -48,18 +48,26 @@ class Course {
     }
 
     addStudent() {
-        let name = prompt("Enter student full name:","Student Name");
-        let email = prompt("Student email:","user@example.com");
+        let name = prompt("Enter student full name:", "Student Name");
+        let email = prompt("Student email:", "user@example.com");
         let newStudent = new Student(name, email);
         this.students.push(newStudent);
         updateRoster(this);
+
     }
 
     setTeacher() {
-        let name = prompt("Enter full teacher name:","Teacher name");
-        let email = prompt("Enter teacher email:","teacher@email.com");
+        let name = prompt("Enter full teacher name:", "Teacher name");
+        let email = prompt("Enter teacher email:", "teacher@email.com");
         let honorific = prompt("Enter honorific (e.g. Dr., Prof., Mr., Ms.):");
         this.teacher = new Teacher(name, email, honorific);
+        updateRoster(this);
+    }
+
+    // Method to remove teacher.
+
+    removeTeacher() {
+        this.teacher = null;
         updateRoster(this);
     }
 
@@ -137,6 +145,13 @@ let addTeacherButton = document.querySelector('#add-teacher');
 addTeacherButton.addEventListener('click', function (e) {
     console.log('Calling setTeacher() method.');
     myCourse.setTeacher();
+})
+
+// Create event listener for removing a teacher.
+let removeTeacherButton = document.querySelector('#remove-teacher');
+removeTeacherButton.addEventListener('click', function (e) {
+    console.log('Calling removeTeacher() method.');
+    myCourse.removeTeacher();
 })
 
 // Call Update Roster to initialize the content of the page.
